@@ -52,7 +52,10 @@ There are no Denny's locations outside of the US.
 
 ### Exercise 4
 
-...
+Ways to determine whether or not any establishment has any locations outside the U.S. 
+
+1. Determine whether the state is one of the states for the US. 
+2. Determine whether the longitude and the latitude are within the ranges of those for the US. 
 
 ### Exercise 5
 
