@@ -80,5 +80,19 @@ dn %>%
   mutate(country = "United States")
 ```
 
-Add exercise headings as needed.
+### Exercise 7
 
+Find the La Quinta locations that are outside the US, and figure out which country they are in.
+
+```{r lq-outside-us}
+lq_outside_us <- lq %>% 
+  filter(!(state %in% states$abbreviation))
+lq_outside_us
+
+lq_outside_us <- lq_outside_us %>% 
+  mutate(country = c("Mexico", "Mexico", "Mexico", "Mexico", "Colombia", "Mexico", "Mexico", "Canada", "Mexico", "Mexico", "Mexico", "Mexico", "Honduras", "Canada"))
+lq_outside_us
+
+```
+
+```{r }
