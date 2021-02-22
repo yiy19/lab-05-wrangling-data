@@ -59,7 +59,17 @@ Ways to determine whether or not any establishment has any locations outside the
 
 ### Exercise 5
 
-...
+```{r rename-datasets}
+dn <- dennys
+lq <- laquinta
+
+```
+
+Filter for states that are not in states$abbreviation.
+```{r filter-not-states}
+dn %>% 
+  filter(!(state %in% states$abbreviation))
+```
 
 ### Exercise 6
 
