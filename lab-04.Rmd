@@ -127,3 +127,24 @@ lq %>%
 California has the most Denny's locations, and Delaware has the fewest. It's surprising given that Denny's serves traditional American food, such as burgers and breakfast items, which I would think are popular in the South than in the Western coast.  
 
 Texas has the most La Quinta's locations, and Maine has the fewest. It's not that surprising because La Quinta's a hotel, and it's likely to be in a place where people would be traveling a lot. The fact that there are the most La Quinta's locations in Texas, Florida, California, and Georgia seems to be in line with that. 
+
+### Exercise 10
+```{r per-area}
+# we want to put together the two datasets into one data frame
+dn <- dn %>% 
+  mutate(establishment = "Deeny's")
+lq <- lq %>% 
+  mutate(establishment = "La Quinta")
+
+# use bind_rows to bind the datasets because they have the same columns
+dn_lq <- bind_rows(dn, lq)
+
+# plot the location of the two establishments
+
+cb.palette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+
+ggplot(dn_lq, mapping = aes(x = longitude, y = latitude, color = establishment)) +
+  geom_point() +
+  scale_color_manual(values = cb.palette)
+
+```
