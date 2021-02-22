@@ -73,7 +73,12 @@ dn %>%
 
 ### Exercise 6
 
-...
+Add a country variable to the Denny's dataset and set all observations equal to "United States."
+
+```{r set-country}
+dn %>% 
+  mutate(country = "United States")
+```
 
 Add exercise headings as needed.
 
