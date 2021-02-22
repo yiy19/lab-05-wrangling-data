@@ -8,27 +8,39 @@ output: github_document
 ### Load packages and data
 
 ```{r load-packages, message = FALSE}
+# install.packages("devtools")
+devtools::install_github("rstudio-education/dsbox")
+```
+
+```{r load-packages}
 library(tidyverse) 
 library(dsbox) 
 ```
 
 ```{r load-data, message = FALSE}
 states <- read_csv("data/states.csv")
+str(states)
 ```
 
 ### Exercise 1
 
-Remove this text, and add your answer for Exercise 1 here.
-Add code chunks as needed.
-Don't forget to label your code chunk.
-Do not use spaces in code chunk labels.
+There are 6 columns and 1,643 rows in dennys. The columns represent location information about Denny's. The rows represent different Dennis' branches. 
+
+```{r dennys-dimensions}
+glimpse(dennys)
+nrow(dennys)
+ncol(dennys)
+```
+
 
 ### Exercise 2
 
-Remove this text, and add your answer for Exercise 1 here.
-Add code chunks as needed.
-Don't forget to label your code chunk.
-Do not use spaces in code chunk labels.
+```{r laquinta-dimensions, eval=FALSE}
+glimpse(laquinta)
+nrow(laquinta)
+ncol(laquinta)
+```
+
 
 ### Exercise 3
 
