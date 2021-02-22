@@ -126,13 +126,13 @@ lq %>%
 ```
 California has the most Denny's locations, and Delaware has the fewest. It's surprising given that Denny's serves traditional American food, such as burgers and breakfast items, which I would think are popular in the South than in the Western coast.  
 
-Texas has the most La Quinta's locations, and Maine has the fewest. It's not that surprising because La Quinta's a hotel, and it's likely to be in a place where people would be traveling a lot. The fact that there are the most La Quinta's locations in Texas, Florida, California, and Georgia seems to be in line with that. 
+Texas has the most La Quinta's locations, and Maine has the fewest. It's not that surprising because La Quinta's a hotel, and it's likely to be in a place where people would be traveling a lot. The fact that there are the most La Quinta's locations in Texas, Florida, California, and Georgia seems to be in line with that.It's also not suprising because California has the most Denny's locations. 
 
 ### Exercise 10
 ```{r per-area}
 # we want to put together the two datasets into one data frame
 dn <- dn %>% 
-  mutate(establishment = "Deeny's")
+  mutate(establishment = "Denny's")
 lq <- lq %>% 
   mutate(establishment = "La Quinta")
 
@@ -148,3 +148,30 @@ ggplot(dn_lq, mapping = aes(x = longitude, y = latitude, color = establishment))
   scale_color_manual(values = cb.palette)
 
 ```
+
+
+### Exercise 11
+``` {r dn_lq-nc}
+dn_lq %>% 
+  filter(state == "NC") %>% 
+ggplot(dn_lq, mapping = aes(x = longitude, y = latitude, color = establishment)) +
+  geom_point(alpha = .66) +
+  scale_color_manual(values = cb.palette)
+
+```
+
+Visually, Mitch Hedberg's joke partially holds in North Carolina. Some of La Quinta's locations in the state are close to Denny's while others are not. 
+
+### Exercise 12
+```{r dn_lq-tx}
+dn_lq %>% 
+  filter(state == "TX") %>% 
+ggplot(dn_lq, mapping = aes(x = longitude, y = latitude, color = establishment)) +
+  geom_point(alpha = .66) +
+  scale_color_manual(values = cb.palette)
+
+```
+
+Mitch Hedberg’s joke appears to hold in Texas. Most of Denny's and La Quinta's locations in Texas are next to each other. 
+
+
