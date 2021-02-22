@@ -46,7 +46,9 @@ ncol(laquinta)
 
 ### Exercise 3
 
-...
+There are La Quinta's locations outside of the US. The countries include Chile, Colombia, Honduras, Canada, and Mexico. 
+
+There are no Denny's locations outside of the US. 
 
 ### Exercise 4
 
