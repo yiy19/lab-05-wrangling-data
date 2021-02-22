@@ -95,4 +95,15 @@ lq_outside_us
 
 ```
 
-```{r }
+```{r country-variable-lq}
+lq <- lq %>%
+  mutate(country = case_when(
+    state %in% state.abb     ~ "United States",
+    state %in% c("ON", "BC") ~ "Canada",
+    state == "ANT"           ~ "Colombia",
+    state %in% c("AG", "QR", "CH", "NL", "VE", "PU", "SL") ~ "Mexico",
+    state == "FM" ~ "Honduras"
+    )
+  )
+glimpse(lq)
+```
