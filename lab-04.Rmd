@@ -94,7 +94,7 @@ lq_outside_us <- lq_outside_us %>%
 lq_outside_us
 
 ```
-
+### Exercise 8
 ```{r country-variable-lq}
 lq <- lq %>%
   mutate(country = case_when(
@@ -111,3 +111,19 @@ lq <- lq %>%
   filter(country == "United States")
 ```
 
+### Exercise 9
+```{r count-by-state}
+dn %>%
+  count(state) %>%
+  inner_join(states, by = c("state" = "abbreviation")) %>% 
+  arrange(n)
+
+lq %>% 
+  count(state) %>% 
+  inner_join(states, by = c("state" = "abbreviation"))%>% 
+  arrange(n)
+
+```
+California has the most Denny's locations, and Delaware has the fewest. It's surprising given that Denny's serves traditional American food, such as burgers and breakfast items, which I would think are popular in the South than in the Western coast.  
+
+Texas has the most La Quinta's locations, and Maine has the fewest. It's not that surprising because La Quinta's a hotel, and it's likely to be in a place where people would be traveling a lot. The fact that there are the most La Quinta's locations in Texas, Florida, California, and Georgia seems to be in line with that. 
