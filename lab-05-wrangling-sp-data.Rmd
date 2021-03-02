@@ -33,6 +33,8 @@ nrow(dn_ak)             # count the number of observations
 ```
 There are three Denny's locations in Alaska. 
 
+
+
 #### Ex 2. Filter the La Quinta dataframe for Alaska (AK) and save the result as lq_ak. How many La Quinta locations are there in Alaska?
 ```{r ex2-lq-alaska}
 lq_ak <- lq %>%
@@ -41,13 +43,15 @@ nrow(lq_ak)
 ```
 There are two La Quinta's locations in Alaska.
 
+
+
 ### Next we’ll calculate the distance between all Denny’s and all La Quinta locations in Alaska. 
 
 #### Ex 3. How many pairings are there between all Denny’s and all La Quinta locations in Alaska, i.e., how many distances do we need to calculate between the locations of these establishments in Alaska?
 
 We need to calculate 2 X 3 = 6 distances between the locations of all Denny's and La Quinta in Alaska.
 
-#### In order to calculate these six distances, we first need to combine the two dataframes by using join. The resulting dataframe will contain a table looking like this:
+In order to calculate these six distances, we first need to combine the two dataframes by using join. The resulting dataframe will contain a table looking like this:
 
 ```{r image, fig.height=4, fig.width=5}
 im <- load.image("/Users/yedam/Documents/GitHub/DSP/LAB/lab-05-wrangling-data/dennys-laquinta-sketches.004.png")
@@ -59,11 +63,35 @@ dn_lq_ak <- full_join(dn_ak, lq_ak, by = "state")
 dn_lq_ak
 ```
 
+
+
 #### Ex 4. How many observations are in the joined dn_lq_ak data frame? What are the names of the variables in this data frame.
 
 There are 11 observations in the joined dn_lq_ak frame. The variables are as follows: address.x, city.x, state, zip.x, longitude.x, address.y, city.y, zip.y, longitude.y, and latitude.y.
 
 Note: .x in the variable names means the variable comes from the x data frame (the first argument in the full_join call, i.e. dn_ak), and .y means the variable comes from the y data frame. These variables are renamed to include .x and .y because the two data frames have the same variables and it’s not possible to have two variables in a data frame with the exact same name.
+
+
+
+#### Ex 5. What function from the tidyverse do we use the add a new variable to a data frame while keeping the existing variables?
+
+```{r haversine}
+
+haversine <- function(long1, lat1, long2, lat2, round = 3) {
+  # convert to radians
+  long1 = long1 * pi / 180
+  lat1  = lat1  * pi / 180
+  long2 = long2 * pi / 180
+  lat2  = lat2  * pi / 180
+  
+  R = 6371 # Earth mean radius in km
+  
+  a = sin((lat2 - lat1)/2)^2 + cos(lat1) * cos(lat2) * sin((long2 - long1)/2)^2
+  d = R * 2 * asin(sqrt(a))
+  
+  return( round(d,round) ) # distance in km
+}
+```
 
 
 
