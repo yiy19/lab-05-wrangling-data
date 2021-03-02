@@ -5,15 +5,16 @@ date: "3/2/2021"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-
+```{r setup, eval = FALSE}
 devtools::install_github("rstudio-education/dsbox")
+install.packages("tiff", type="source") 
 
 ```
 
 ```{r library}
 library(tidyverse) 
 library(dsbox) 
+library(imager)
 ```
 ### Data declaration
 
@@ -40,13 +41,19 @@ nrow(lq_ak)
 ```
 There are two La Quinta's locations in Alaska.
 
+## Next we’ll calculate the distance between all Denny’s and all La Quinta locations in Alaska. Let’s take this step by step. 
 
-## Including Plots
+### Ex 3. How many pairings are there between all Denny’s and all La Quinta locations in Alaska, i.e., how many distances do we need to calculate between the locations of these establishments in Alaska?
 
-You can also embed plots, for example:
+We need to calculate 2 X 3 = 6 distances between the locations of all Denny's and La Quinta in Alaska.
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+### In order to calculate these six distances, we first need to combine the two dataframes by using join. The resulting dataframe will contain a table looking like this:
+
+```{r image, fig.height=4, fig.width=5}
+im <- load.image("/Users/yedam/Documents/GitHub/DSP/LAB/lab-05-wrangling-data/dennys-laquinta-sketches.004.png")
+plot(im)
+
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
