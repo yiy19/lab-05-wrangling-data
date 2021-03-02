@@ -15,12 +15,7 @@ devtools::install_github("rstudio-education/dsbox")
 library(tidyverse) 
 library(dsbox) 
 ```
-
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+### Data declaration
 
 ```{r data}
 dn <- dennys
@@ -35,7 +30,15 @@ dn_ak <- dn %>%
 nrow(dn_ak)             # count the number of observations
 
 ```
-There are three locations. 
+There are three Denny's locations in Alaska. 
+
+### Ex 2. Filter the La Quinta dataframe for Alaska (AK) and save the result as lq_ak. How many La Quinta locations are there in Alaska?
+```{r ex2-lq-alaska}
+lq_ak <- lq %>%
+  filter(state == "AK")
+nrow(lq_ak)
+```
+There are two La Quinta's locations in Alaska.
 
 
 ## Including Plots
