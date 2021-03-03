@@ -142,3 +142,50 @@ dn_lq_ak_mindist %>%
 
 
 ```
+
+#### Ex 9. Repeat the same analysis for North Carolina 
+```{r filter-nc}
+# (i) filter Denny’s and La Quinta Data Frames for NC
+dn_nc <- dn %>%
+  filter(state == "NC") # filter for Denny's locations in NC
+nrow(dn_nc)   
+
+lq_nc <- lq %>%
+  filter(state == "NC") # filter for La Quinta's locations in NC
+nrow(lq_nc)  
+```
+```{r join-nc}
+# (ii) join these data frames to get a complete list of all possible pairings
+dn_lq_nc <- full_join(dn_nc, lq_nc, by = "state")
+dn_lq_nc
+
+```
+```{r distance-nc}
+# (iii) calculate the distances between all possible pairings of Denny’s and La Quinta in NC
+dn_lq_nc <- dn_lq_nc %>% 
+  mutate(distance = haversine(longitude.x, latitude.x, longitude.y, latitude.y, round = 3))
+dn_lq_nc
+```
+
+
+```{r min-distance-nc}
+# (iv) find the minimum distance between each Denny’s and La Quinta location
+dn_lq_nc_mindist <- dn_lq_nc %>%
+  group_by(address.x) %>%
+  summarise(closest = min(distance))  # note the function closest = min(distance) as part of summarise
+dn_lq_nc_mindist
+```
+
+```{r distribition-nc}
+# (v) visualize and describe the distribution of these shortest distances using appropriate summary statistics.
+dn_lq_nc_mindist %>% 
+  ggplot(aes(y = closest)) +
+  geom_boxplot(color = "magenta") +
+  labs(
+    title = "All Denny's locations in North Carolina are mostly around within 55 kilometers of a La Quinta's location",
+    x = "Denny's Location",
+    y = "Distance from the closest La Quinta's"
+  )
+
+```
+
