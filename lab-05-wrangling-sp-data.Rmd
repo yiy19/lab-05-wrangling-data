@@ -225,3 +225,51 @@ dn_lq_tx_mindist %>%
   )
 
 ```
+
+#### Ex 11. The same analysis for California
+```{r analysis-ca}
+# create dataset
+dn_ca <- dn %>% 
+  filter(state == "CA")
+nrow(dn_ca)
+
+lq_ca <- lq %>% 
+  filter(state == "CA")
+nrow(lq_ca)
+
+# join the two datasets
+dn_lq_ca <- full_join(dn_ca, lq_ca, by = "state")
+dn_lq_ca
+
+# compute distance
+dn_lq_ca <- dn_lq_ca %>% 
+  mutate(distance = haversine(longitude.x, latitude.x, longitude.y, latitude.y, round = 3))
+dn_lq_ca
+
+# compute the closest
+dn_lq_ca_mindist <- dn_lq_ca %>% 
+  group_by(address.x) %>%         # this is the key! 
+  summarise(closest = min(distance))
+dn_lq_ca_mindist
+
+# compute the mean
+(dn_lq_ca_mindist %>% 
+    summarise(a = mean(closest)))
+
+# visualize the distribution of the closest distances
+dn_lq_ca_mindist %>% 
+  ggplot(aes(y = closest)) +
+  geom_boxplot(color = "dark green") +
+  labs(
+    title = "All Denny's locations in California are mostly around within 23 kilometers of a La Quinta's location",
+    y = "Distance from the closest La Quinta's"
+  )
+
+
+```
+
+#### Ex 12. Among the states you examined, where is Mitch Hedberg’s joke most likely to hold true? 
+
+I would say that Mitch Hedberg's joke most likely holds in Texas. This is because Texas has a large number of Denny's (200) and La Quinta's (237) locations and the average distance from one Denny's location to the closest La Quinta's is less than 5 kilometers. Alaska is a good candidate as its average distance from one Denny's location to the closest La Quinta's is also elss than 5 kilometers, but the sample size is too small (n = 3). Given the large sample size of distances and the strong central tendency shown in those distances in Texas, Texas is where the joke holds the most. 
+
+
