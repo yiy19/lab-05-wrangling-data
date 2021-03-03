@@ -114,3 +114,31 @@ dn_lq_ak_mindist <- dn_lq_ak %>%
 dn_lq_ak_mindist
 
 ```
+
+
+#### Ex 8. Describe the distribution of the distances between Denny’s and the nearest La Quinta locations in Alaska. Also include an appripriate visualization and relevant summary statistics.
+
+Any of Denny's locations in Alaksa is within six kilometers of a La Quinta's location in the same state. 
+
+```{r distance-distribution}
+(dn_lq_ak_mindist_sum <- dn_lq_ak_mindist %>% 
+  summarize(m = mean(closest)))
+
+dn_lq_ak_mindist %>% 
+  ggplot(aes(x = address.x, y = closest)) +
+  geom_point(color = "magenta") +
+  geom_text(mapping = aes(label =  closest), vjust = -.5) +
+  geom_abline(intercept = 4.41, slope = 0, alpha = .3) + 
+  labs(
+    title = "All Denny's locations in Alaska are within 6 kilometers of a La Quinta's location",
+    x = "Denny's Location",
+    y = "Distance from the closest La Quinta's",
+    subtitle = "With the mean of 4.41 km"
+  )
+
+
+
+  
+
+
+```
